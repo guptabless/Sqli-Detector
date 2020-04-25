@@ -1,17 +1,24 @@
 import urllib.request
+import bcolors
 
-input_url = input("please enter url where we have to check sql injection")
-print(input_url)
+print("-----------------------------------------------")
+print("sqlInjection")
+print("Code By : NG")
+print("Usage: python sqlinjection.py and then follow the instructions")
 
-sql_url = input_url + "12'" + "&submit=Search"
-print(sql_url)
+print("-----------------------------------------------")
+input_url = input(bcolors.BLUE + "please enter the endpoint where we have to check sql injection")
+print("URL should have to start with http and https")
+print(bcolors.BITALIC)
+
+sql_url = input_url + "'"
 
 resp = urllib.request.urlopen(sql_url)
 body = resp.read()
 
 fullbody = body.decode('utf-8')
-
 if "You have an error in your SQL syntax" in fullbody:
-    print("vulnerable to sql injection")
+    print(bcolors.ERRMSG + "vulnerable to sql injection")
 else:
-    print("not vulnerable to sql injection")
+    print(bcolors.OKMSG + "Not vulnerable to sql injection")
+
